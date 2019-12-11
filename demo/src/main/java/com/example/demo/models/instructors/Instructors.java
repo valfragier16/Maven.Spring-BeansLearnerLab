@@ -1,6 +1,6 @@
-package com.example.demo.instructors;
+package com.example.demo.models.instructors;
 
-import com.example.demo.People;
+import com.example.demo.models.People;
 
 import java.util.List;
 

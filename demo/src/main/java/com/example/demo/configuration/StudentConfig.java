@@ -1,27 +1,34 @@
 package com.example.demo.configuration;
 
-import com.example.demo.students.Student;
-import com.example.demo.students.Students;
+import com.example.demo.models.students.Student;
+import com.example.demo.models.students.Students;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 public class StudentConfig {
 
     @Bean(name = "students")
     public Students currentStudent(){
-        Students students = new Students(new ArrayList<>());
-        students.add(new Student((long) 12, "Valerie"));
-        students.add(new Student((long) 13, "Kendra"));
-        return students;
+        List<Student> list = new ArrayList<>();
+        list.add(new Student(1L, "Valerie"));
+        list.add(new Student(2L, "Kai"));
+        list.add(new Student(3L, "Kendra"));
+        list.add(new Student(4L, "Ryan"));
+        return new Students(list);
     }
 
-    @Bean
+    @Bean(name = "previousStudents")
     public Students previousStudents(){
-        Students students = new Students(new ArrayList<>());
-        students.add(new Student((long) 14, "Valerie"));
-        return students;
+        List<Student> list = new ArrayList<>();
+        list.add(new Student(1L, "William"));
+        list.add(new Student(2L, "Davis"));
+        list.add(new Student(3L, "April"));
+        list.add(new Student(4L, "Kate"));
+
+        return new Students(list);
     }
 }

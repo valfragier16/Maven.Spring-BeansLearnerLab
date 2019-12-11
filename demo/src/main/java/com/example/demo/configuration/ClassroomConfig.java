@@ -1,37 +1,27 @@
 package com.example.demo.configuration;
 
-import com.example.demo.instructors.Instructor;
-import com.example.demo.instructors.Instructors;
+import com.example.demo.models.Classroom;
+import com.example.demo.models.instructors.Instructors;
+import com.example.demo.models.students.Students;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-
-import java.util.ArrayList;
+import org.springframework.context.annotation.DependsOn;
 
 @Configuration
 public class ClassroomConfig {
-    @Bean(name = "UsaInstructors")
-    public Instructors usaInstructors(){
-        Instructors instructors = new Instructors(new ArrayList<>());
-        instructors.add(new Instructor((long) 12, "Valerie"));
-        instructors.add(new Instructor((long) 13, "Kendra"));
-        return instructors;
-    }
 
-    @Bean(name = "PhiliInstructors")
-    public Instructors philiInstructors(){
-        Instructors instructors = new Instructors(new ArrayList<>());
-        instructors.add(new Instructor((long) 11, "Kai"));
-        return instructors;
+    @Bean
+    @Qualifier("currentCohort")
+    @DependsOn({"instructors", "students"})
+    public Classroom currentCohort(Instructors instructors, Students students){
+        return new Classroom(instructors, students);
     }
 
     @Bean
-    @Primary
-    public Instructors instructors(){
-        Instructors instructors = new Instructors(new ArrayList<>());
-        instructors.add(new Instructor((long) 8, "Ryan"));
-        instructors.add(new Instructor((long) 9, "King"));
-        instructors.add(new Instructor((long) 10, "Brandon"));
-        return instructors;
+    @Qualifier("previousCohort")
+    @DependsOn({"instructors", "previousStudents"})
+    public Classroom previousCohort(Instructors instructors, Students previousStudents){
+        return new Classroom(instructors, previousStudents);
     }
 }

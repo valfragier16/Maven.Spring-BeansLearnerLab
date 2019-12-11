@@ -1,8 +1,8 @@
-package com.example.demo;
+package com.example.demo.models;
 
-import com.example.demo.instructors.Instructors;
+import com.example.demo.models.instructors.Instructors;
 import com.example.demo.interfaces.Teacher;
-import com.example.demo.students.Students;
+import com.example.demo.models.students.Students;
 
 import java.util.ArrayList;
 
@@ -17,6 +17,7 @@ public class Classroom {
 
     public void hostLecture(Teacher teacher, double numberOfHours){
         teacher.lecture(new ArrayList<>(10), numberOfHours);
+
     }
 
     public Instructors getInstructors() {

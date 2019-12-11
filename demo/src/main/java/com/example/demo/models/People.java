@@ -1,14 +1,12 @@
-package com.example.demo;
+package com.example.demo.models;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
 public abstract class People<PersonType extends Person> implements Iterable<PersonType> {
-    List<PersonType> personList = new ArrayList<>();
+    private List<PersonType> personList;
 
-    // Constructor
     public People(List<PersonType> personList){
         this.personList = personList;
     }
@@ -33,7 +31,7 @@ public abstract class People<PersonType extends Person> implements Iterable<Pers
         this.personList.addAll((Collection<? extends PersonType>) personList);
     }
 
-    public PersonType findById(Long id){
+    public PersonType findById(long id){
         for (PersonType person : personList) {
             if (person.getId() == id){
                 return person;
